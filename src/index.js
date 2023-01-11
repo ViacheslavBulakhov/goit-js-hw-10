@@ -41,26 +41,26 @@ function createCountryList(data) {
     })
 }
 function countryInfo(data) {
-    
     data.map((item) => {
-        const languagesByCountry = Object.values(item.languages).join(', ');
+        const { languages, population, capital } = item;
+        const languagesByCountry = Object.values(languages).join(', ');
 
         refs.country.insertAdjacentHTML('beforeend', 
         `<div>${ representativeContry(item)}</div>
         <ul>
-            <li>Capital: <span>${item.capital}</span></li>
-            <li>Population: <span>${item.population}</span></li>
+            <li>Capital: <span>${capital}</span></li>
+            <li>Population: <span>${population}</span></li>
             <li>Languages: <span>${languagesByCountry}</span></li>
         </ul`)
     })
 }
-function representativeContry(item) {
+function representativeContry({name,flags}) {
         return    `<img
             width = "30px"
             height = "30px"
-            src="${item.flags.svg}"
-            alt="${item.name.official}">
-            <h2>${item.name.official}</h2>`
+            src="${flags.svg}"
+            alt="${name.official}">
+            <h2>${name.official}</h2>`
 }
 function resetHtml() {
     refs.ul.innerHTML = '';
